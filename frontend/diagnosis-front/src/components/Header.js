@@ -14,19 +14,13 @@ export class AppHeader extends React.Component {
     render() {
         return (
             <nav className="navbar navbar-light bg-light navbar-expand-lg">
-                <a className="navbar-brand ml-3" href="#">
+                <Link className="navbar-brand ml-3" to="/">
                     Diagnostic: ràpid!
-            </a>
+                </Link>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <Link className="nav-link" to="/describe">Describe</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/refine">Refine</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/review">Review</Link>
+                            <Link className="nav-link" to="/describe">Start</Link>
                         </li>
                     </ul>
                 </div>

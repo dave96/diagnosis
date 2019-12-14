@@ -1,10 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: Montserrat;
 }
 
 code {
@@ -13,7 +10,19 @@ code {
 }
 
 .navbar {
-  border-bottom: 1px solid #CCC;
+  border-bottom: 1px solid #DDD;
+  background-color: #EFEFEF;
+  box-shadow: 0 3px 3px 0px #EEE;
+}
+
+.btn-primary {
+  background-color: #A45BA2;
+  border-color: #A45BA2;
+}
+
+.btn-primary:hover {
+  background-color: #623062;
+  border-color: #623062;
 }
 
 .btn-yes {
@@ -21,9 +30,9 @@ code {
   border-color: #5DA271;
 }
 
-.btn-yes:hover {
-  background-color: #478058;
-  border-color: #478058;
+.btn-yes:hover, .btn-yes:focus, .btn-yes:active {
+  background-color: #478058 !important;
+  border-color: #478058 !important;
 }
 
 .btn-no {
@@ -31,9 +40,9 @@ code {
   border-color: #A53B40;
 }
 
-.btn-no:hover {
-  background-color: #7d2c30;
-  border-color: #7d2c30;
+.btn-no:hover, .btn-no:focus, .btn-no:active {
+  background-color: #7d2c30 !important;
+  border-color: #7d2c30 !important;
 }
 
 .btn-na {
@@ -41,7 +50,15 @@ code {
   border-color: #CC834B;
 }
 
-.btn-na:hover {
-  background-color: #a1683d;
-  border-color: #a1683d;
+.btn-na:hover, .btn-na:focus, .btn-na:active {
+  background-color: #a1683d !important;
+  border-color: #a1683d !important;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+  background-color: #A45BA2;
+}
+
+.progress-bar {
+  background-color: #A45BA2;
 }

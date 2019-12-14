@@ -1,12 +1,42 @@
 import React from 'react';
 import { Step } from './Step.js';
+import { withRouter } from 'react-router-dom';
 
-export class Review extends React.Component {
+class Review extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: null,
+            phenotyping: this.props.phenotypes,
+            diagnosis: [
+                { label: "Disease 1", prob: 0.4 },
+                { label: "Disease 2", prob: 0.3 },
+                { label: "Disease 3", prob: 0.3 }
+            ]
         };
+    }
+
+    deepPhenotyping() {
+        let items = [];
+
+        for(let i = 0; i < this.state.phenotyping.length; ++i) {
+            let currentPheno = this.state.phenotyping[i];
+            items.push(<li className="list-group-item" key={i}>{currentPheno.label}</li>);
+        }
+
+        return items;
+    }
+
+    diagnosis() {
+        let items = [];
+        let diagItems = this.state.diagnosis.concat().sort((a, b) => b - a);
+
+
+        for(let i = 0; i < diagItems.length; ++i) {
+            let currentDiag = diagItems[i];
+            items.push(<li className="list-group-item" key={i}>{currentDiag.label} <span style={{float: "right"}}>({currentDiag.prob})</span></li>);
+        }
+
+        return items;
     }
 
     render() {
@@ -20,8 +50,10 @@ export class Review extends React.Component {
                                 <div className="card-header">
                                     Your deep phenotyping
                                 </div>
-                                <div className="card-body">
-                                    Uatever
+                                <div className="card-body p-0">
+                                    <ul className="list-group list-group-flush">
+                                        {this.deepPhenotyping()}
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -30,8 +62,10 @@ export class Review extends React.Component {
                                 <div className="card-header">
                                     Possible diagnosis
                                 </div>
-                                <div className="card-body">
-                                    Uatever
+                                <div className="card-body p-0">
+                                    <ul className="list-group list-group-flush">
+                                        {this.diagnosis()}
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -41,3 +75,5 @@ export class Review extends React.Component {
         );
     }
 }
+
+export default withRouter(Review);

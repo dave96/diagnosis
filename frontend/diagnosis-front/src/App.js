@@ -1,8 +1,9 @@
 import React from 'react';
 import { AppHeader } from "./components/Header.js";
 import { Describe } from './components/Describe.js';
-import { Refine } from './components/Refine.js';
-import { Review } from './components/Review.js';
+import Refine from './components/Refine.js';
+import Review from './components/Review.js';
+import Home from './components/Home.js';
 import './App.css';
 
 import {
@@ -11,30 +12,36 @@ import {
   Route
 } from "react-router-dom";
 
-function App() {
-  return (
-    <Router>
-    <AppHeader />
-      {/* A <Switch> looks through its children <Route>s and
-          renders the first one that matches the current URL. */}
-      <Switch>
-        <Route path="/describe">
-          <Describe />
-        </Route>
-        <Route path="/refine">
-          <Refine />
-        </Route>
-        <Route path="/review">
-          <Review />
-        </Route>
-        <Route path="/">
-          Home
-        </Route>
-      </Switch>
-  </Router>
+class App extends React.Component {
+  constructor(props) {
+      super(props);
+      this.state = {
+          originalPhenotypes: [],
+          selectedPhenotypes: []
+      };
+  }
 
-
-  );
+  render() {
+    return (
+      <Router>
+      <AppHeader />
+        <Switch>
+          <Route path="/describe">
+            <Describe setPhenotypes={(phenotypes) => {this.setState({originalPhenotypes: phenotypes}); console.log(phenotypes); }} />
+          </Route>
+          <Route path="/refine">
+            <Refine setPhenotypes={(phenotypes) => this.setState({selectedPhenotypes: phenotypes})} />
+          </Route>
+          <Route path="/review">
+            <Review phenotypes={this.state.originalPhenotypes.concat(this.state.selectedPhenotypes)} />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+    </Router>
+    );
+  }
 }
 
 export default App;
