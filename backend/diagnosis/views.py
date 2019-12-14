@@ -1,15 +1,30 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework import viewsets
+from diagnosis.models import *
+from django.db import models
 import json
 
 def phenotype_suggestion(request, pattern):
-    data_to_dump = [
-        { 'name': 'Pheno1', 'id': 123 },
-        { 'name': 'Pheno2', 'id': 124 }
-    ]
+    phenotypes = Phenotype.objects.all()
 
-    data = json.dumps(data_to_dump)
+
     return HttpResponse(data, content_type='application/json')
+
+def phenotype_list(request):
+    list_phenos = ['HP:0004322', 'HP:0001250', 'HP:0001249']
+    list_obj = None
+
+    for pheno in list_phenos:
+        if list_obj == None:
+            list_obj = Disorder.objects.filter(disorder_phenotype__phenotype_orphanumber__orphanumber__exact = pheno)
+        else:
+            list_obj = (list_obj & Disorder.objects.filter(disorder_phenotype__phenotype_orphanumber__orphanumber__exact = pheno))
+
+    data = json.dumps(len(list_obj))
+    return HttpResponse(data, content_type='application/json')
+
+
+
 
 # Create your views here.

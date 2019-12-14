@@ -16,7 +16,6 @@ class Frequency(models.Model):
     orphanumber = models.CharField(max_length=120,unique=True)
     text = models.CharField(max_length=120)
 
-
 class Disorder_Phenotype(models.Model):
     disorder_orphanumber = models.ForeignKey(Disorder, on_delete=models.CASCADE)
     phenotype_orphanumber = models.ForeignKey(Phenotype, on_delete=models.CASCADE)

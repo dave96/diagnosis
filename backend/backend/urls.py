@@ -20,5 +20,6 @@ from diagnosis import views
 
 urlpatterns = [
     path('api/phenotype/<slug:pattern>', views.phenotype_suggestion, name='phenotype_suggestion'),
+    path('test', views.phenotype_list, name='phenotype_list'),
     path('admin/', admin.site.urls),
 ]
