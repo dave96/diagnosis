@@ -44,7 +44,10 @@ class Model:
         edges = edges.most_common(int(n))
         nodes = set([edge[0][0] for edge in edges])
 
-        return list(nodes)
+        # Get the names and de descriptions for the nodes
+        result = [self.ontology.nodes[node] for node in nodes]
+
+        return result
 
 
 class PhenotypeGraph:
