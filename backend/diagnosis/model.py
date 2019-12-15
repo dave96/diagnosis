@@ -29,11 +29,7 @@ class Model:
 
         self.ontology = obo_full
         self.patient = Patient(self.ontology, phenotypes)
-        with Pool(cpu_count()) as p:
-            self.diseases = p.map(self.create_disease, diseases)
-
-    def create_disease(self, disease):
-        return Disease(self.ontology, disease)
+        self.diseases = [Disease(self.ontology, disease) for disease in diseases]
 
     def jaccard_index(self):
         return self.patient.jaccard_index(self.diseases)
