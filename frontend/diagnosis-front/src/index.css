@@ -11,8 +11,11 @@ code {
 
 .navbar {
   border-bottom: 1px solid #DDD;
-  background-color: #EFEFEF;
   box-shadow: 0 3px 3px 0px #EEE;
+}
+
+.navbar.bg-light {
+  background-color: #DEDEDE !important;
 }
 
 .btn-primary {

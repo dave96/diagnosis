@@ -1,31 +1,28 @@
 import obonet
 import networkx
 from collections import Counter
-from sys import argv, exit
+# from sys import argv, exit
 
-def get_questions(conn, ontology_fn, phenotypes, n):
-    model = Model(conn, ontology_fn, phenotypes)
+def get_questions(ontology_fn, phenotypes, n, diseases):
+    model = Model(ontology_fn, phenotypes, diseases)
     return model.get_questions(n)
 
 
-def get_jaccard(conn, ontology_fn, phenotypes):
-    model = Model(conn, ontology_fn, phenotypes)
+def get_jaccard(ontology_fn, phenotypes, diseases):
+    model = Model(ontology_fn, phenotypes, diseases)
     return model.jaccard_index()
 
-def get_probabilities(conn, ontology_fn, phenotypes):
-    model = Model(conn, ontology_fn, phenotypes)
+def get_probabilities(ontology_fn, phenotypes, diseases):
+    model = Model(ontology_fn, phenotypes, diseases)
     return model.probabilities()
 
 class Model:
-    def __init__(self, conn, ontology_fn, phenotypes):
+    def __init__(self, ontology_fn, phenotypes, diseases):
         self.ontology = obonet.read_obo(ontology_fn)
         self.patient = Patient(self.ontology, phenotypes)
         # TODO Get all diseases that contain the phenotypes
         # TODO Construct the diseases with all their associated phenotypes
-        disease1 = Disease(self.ontology, ['HP:0000218', 'HP:0000238', 'HP:0000256'])
-        disease2 = Disease(self.ontology, ['HP:0000218', 'HP:0000518', 'HP:0000541'])
-        disease3 = Disease(self.ontology, ['HP:0000926', 'HP:0002815', 'HP:0002867'])
-        self.diseases = [disease1, disease2, disease3]
+        self.diseases = [Disease(self.ontology, disease) for disease in diseases]
 
     def jaccard_index(self):
         return self.patient.jaccard_index(self.diseases)
@@ -82,26 +79,26 @@ class Disease(PhenotypeGraph):
         super().__init__(ontology, phenotypes)
 
 
-if __name__ == "__main__":
-    if len(argv) < 3:
-        exit('Not enough arguments')
+# if __name__ == "__main__":
+#     if len(argv) < 3:
+#         exit('Not enough arguments')
 
-    ontology_fn = argv[1]
-    n = argv[2]
-    phenotypes = argv[3:]
+#     ontology_fn = argv[1]
+#     n = argv[2]
+#     phenotypes = argv[3:]
 
-    questions = get_questions(None, ontology_fn, phenotypes, n)
-    print(questions)
+#     questions = get_questions(None, ontology_fn, phenotypes, n)
+#     print(questions)
 
-    jaccard = get_jaccard(None, ontology_fn, phenotypes)
-    print(jaccard)
+#     jaccard = get_jaccard(None, ontology_fn, phenotypes)
+#     print(jaccard)
 
-    probabilities = get_probabilities(None, ontology_fn, phenotypes)
-    print(probabilities)
+#     probabilities = get_probabilities(None, ontology_fn, phenotypes)
+#     print(probabilities)
 
-    phenotypes = phenotypes + questions
-    jaccard = get_jaccard(None, ontology_fn, phenotypes)
-    print(jaccard)
+#     phenotypes = phenotypes + questions
+#     jaccard = get_jaccard(None, ontology_fn, phenotypes)
+#     print(jaccard)
 
-    probabilities = get_probabilities(None, ontology_fn, phenotypes)
-    print(phenotypes)
+#     probabilities = get_probabilities(None, ontology_fn, phenotypes)
+#     print(phenotypes)
