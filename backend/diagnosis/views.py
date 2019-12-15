@@ -13,9 +13,8 @@ def phenotype_suggestion(request, pattern):
 
     return JsonResponse(data)
 
-
 def phenotype_list(request):
-    list_phenos = ['HP:0004322', 'HP:0001250', 'HP:0001249']
+    list_phenos = json.loads(request.body.decode('utf-8'))["phenotypes"]
     list_obj = None
 
     for pheno in list_phenos:
@@ -30,10 +29,9 @@ def phenotype_list(request):
     # This one works OK also
     # list_obj = list_obj.prefetch_related(models.Prefetch('disorder_phenotype_set', queryset=Disorder_Phenotype.objects.select_related('phenotype_orphanumber').all()))
     projected_diseases = [[dis_pheno.phenotype_orphanumber.orphanumber for dis_pheno in dis.disorder_phenotype_set.all()] for dis in list_obj]
-    data = json.dumps(projected_diseases)
 
     model = Model('/home/david/Source/diagnosis/data/hp.obo', list_phenos, projected_diseases)
-
+    # return JsonResponse(projected_diseases, safe=False)
     return JsonResponse(model.get_questions(10), safe=False)
 
 
