@@ -14,7 +14,7 @@ def get_jaccard(ontology_fn, phenotypes, diseases):
 
 def get_probabilities(ontology_fn, phenotypes, diseases):
     model = Model(ontology_fn, phenotypes, diseases)
-    return model.probabilities()
+    return model.get_probabilities()
 
 class Model:
     def __init__(self, ontology_fn, phenotypes, diseases):
@@ -25,7 +25,7 @@ class Model:
     def jaccard_index(self):
         return self.patient.jaccard_index(self.diseases)
 
-    def probabilities(self):
+    def get_probabilities(self):
         p = self.jaccard_index()
         p_sum = sum(p)
         return [i/p_sum for i in p]
