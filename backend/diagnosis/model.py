@@ -3,6 +3,8 @@ import networkx
 from collections import Counter
 # from sys import argv, exit
 
+obo_full = None
+
 def get_questions(ontology_fn, phenotypes, n, diseases):
     model = Model(ontology_fn, phenotypes, diseases)
     return model.get_questions(n)
@@ -18,7 +20,13 @@ def get_probabilities(ontology_fn, phenotypes, diseases):
 
 class Model:
     def __init__(self, ontology_fn, phenotypes, diseases):
-        self.ontology = obonet.read_obo(ontology_fn)
+        global obo_full
+        if obo_full is None:
+            obo_full = obonet.read_obo(ontology_fn)
+        else:
+            print("Preloaded")
+
+        self.ontology = obo_full
         self.patient = Patient(self.ontology, phenotypes)
         self.diseases = [Disease(self.ontology, disease) for disease in diseases]
 

@@ -60,7 +60,7 @@ export class Describe extends React.Component {
             ...this.state.selectedItems.slice(0, index),
             ...this.state.selectedItems.slice(index+1)
           ];
-        this.props.setPhenotypes(itemsSpliced.map(x => {return {label: x.term}}));
+        this.props.setPhenotypes(itemsSpliced.map(x => {return {label: x.term, onto: x.orphanumber, orig: true}}));
         this.setState({ selectedItems: itemsSpliced });
     }
 
@@ -105,7 +105,7 @@ export class Describe extends React.Component {
                             onSelect={(value) => {
                                 let intVal = parseInt(value);
                                 let originalObject = data_autocomplete.find(x => x.id === intVal);
-                                this.props.setPhenotypes([...this.state.selectedItems, originalObject].map(x => {return {label: x.term}}));
+                                this.props.setPhenotypes([...this.state.selectedItems, originalObject].map(x => {return {label: x.term, onto: x.orphanumber, orig: true }}));
                                 this.setState({ value: "", selectedItems: [...this.state.selectedItems, originalObject] });
                              } }
                             />

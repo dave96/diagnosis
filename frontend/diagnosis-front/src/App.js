@@ -27,10 +27,10 @@ class App extends React.Component {
       <AppHeader />
         <Switch>
           <Route path="/describe">
-            <Describe setPhenotypes={(phenotypes) => {this.setState({originalPhenotypes: phenotypes}); console.log(phenotypes); }} />
+            <Describe setPhenotypes={(phenotypes) => {this.setState({originalPhenotypes: phenotypes}); }} />
           </Route>
           <Route path="/refine">
-            <Refine setPhenotypes={(phenotypes) => this.setState({selectedPhenotypes: phenotypes})} />
+            <Refine setPhenotypes={(phenotypes) => this.setState({selectedPhenotypes: phenotypes})} firstIterationPhenotypes={this.state.originalPhenotypes} />
           </Route>
           <Route path="/review">
             <Review phenotypes={this.state.originalPhenotypes.concat(this.state.selectedPhenotypes)} />

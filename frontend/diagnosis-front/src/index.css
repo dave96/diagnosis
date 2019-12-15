@@ -23,9 +23,9 @@ code {
   border-color: #A45BA2;
 }
 
-.btn-primary:hover {
-  background-color: #623062;
-  border-color: #623062;
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+  background-color: #623062 !important;
+  border-color: #623062 !important;
 }
 
 .btn-yes {
@@ -33,7 +33,7 @@ code {
   border-color: #5DA271;
 }
 
-.btn-yes:hover, .btn-yes:focus, .btn-yes:active {
+.btn-yes.btn-primary:hover, .btn-yes.btn-primary:focus, .btn-yes.btn-primary:active {
   background-color: #478058 !important;
   border-color: #478058 !important;
 }

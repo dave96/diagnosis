@@ -11,7 +11,7 @@ class Home extends React.Component {
         return(
             <div className="jumbotron jumbotron-fluid">
                 <div className="container">
-                    <h1 className="display-4">Diagnòstic: ràpid</h1>
+                    <h1 className="display-4">Dr. Rare</h1>
                     <p className="lead">You will be asked to describe your symptoms and then answer some questions.</p>
                 </div>
                 <hr className="my-4" />
