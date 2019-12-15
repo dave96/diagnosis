@@ -20,8 +20,6 @@ class Model:
     def __init__(self, ontology_fn, phenotypes, diseases):
         self.ontology = obonet.read_obo(ontology_fn)
         self.patient = Patient(self.ontology, phenotypes)
-        # TODO Get all diseases that contain the phenotypes
-        # TODO Construct the diseases with all their associated phenotypes
         self.diseases = [Disease(self.ontology, disease) for disease in diseases]
 
     def jaccard_index(self):
