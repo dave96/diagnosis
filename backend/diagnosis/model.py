@@ -2,7 +2,6 @@ import obonet
 import networkx
 from collections import Counter
 # from sys import argv, exit
-from multiprocessing import Pool, cpu_count
 
 obo_full = None
 
@@ -73,10 +72,6 @@ class PhenotypeGraph:
         G.add_nodes_from(ontology.nodes)
         self.graph = G
 
-def jackard_index(patient, disease):
-    union = networkx.compose(patient.graph, disease.graph)
-    intersection = networkx.intersection(patient.graph, disease.graph)
-    return len(intersection.edges())/len(union.edges())
 
 class Patient(PhenotypeGraph):
     def __init__(self, ontology, phenotypes):
@@ -84,8 +79,10 @@ class Patient(PhenotypeGraph):
 
     def jaccard_index(self, diseases):
         jaccard = []
-        with Pool(cpu_count()) as p:
-            jaccard = p.starmap(jackard_index, zip(len(diseases)*[self], diseases))
+        for disease in diseases:
+            union = networkx.compose(self.graph, disease.graph)
+            intersection = networkx.intersection(self.graph, disease.graph)
+            jaccard.append(len(intersection.edges())/len(union.edges()))
         return jaccard
 
 
