@@ -53,6 +53,9 @@ class PhenotypeGraph:
         root = 'HP:0000001'
 
         for phenotype in phenotypes:
+            if phenotype not in ontology:
+                continue
+
             paths = list(networkx.all_simple_paths(ontology, source=phenotype, target=root))
             for path in paths:
                 g = ontology.subgraph(path)

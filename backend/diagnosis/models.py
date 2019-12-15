@@ -19,4 +19,4 @@ class Frequency(models.Model):
 class Disorder_Phenotype(models.Model):
     disorder_orphanumber = models.ForeignKey(Disorder, on_delete=models.CASCADE)
     phenotype_orphanumber = models.ForeignKey(Phenotype, on_delete=models.CASCADE)
-    frequency_orphanumber = models.ForeignKey(Frequency , on_delete=models.CASCADE)
+    frequency_orphanumber = models.ForeignKey(Frequency, on_delete=models.CASCADE)
