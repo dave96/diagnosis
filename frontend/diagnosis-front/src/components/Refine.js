@@ -4,6 +4,8 @@ import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 
 function cleanUpString(str) {
+    if(str === undefined)
+        return "";
     let firstIndex = str.indexOf("\"");
     let secondIndex = str.indexOf("\"", firstIndex+1);
 
